@@ -1,0 +1,18 @@
+- **Headline:** Nonfarm payrolls rose by 29,000 in September, and the unemployment rate was 4.2%. Both changed little. The 12-month average payroll gain was 45,000 per month. Employment in all major industries changed little.
+- **Unemployment:** 7.1 million people were unemployed. The rate has stayed in a narrow 4.1% to 4.3% range since March. Private payrolls rose by 46,000, while government fell by 17,000.
+- **Demographic groups:** The Black unemployment rate rose to 7.0% (from 6.0% in August). Rates for adult men (3.9%), adult women (3.6%), teenagers (14.5%), Whites (3.6%), Asians (2.9%) and Hispanics (4.7%) showed little change.
+- **Long-term unemployment:** The number of people jobless 27 weeks or more was little changed at 1.9 million, or 27.1% of the unemployed.
+- **Participation and slack:**
+  - The labor force participation rate was 61.8% and the employment-population ratio was 59.2%, both little changed.
+  - Part-time work for economic reasons was little changed at 4.5 million.
+  - People outside the labor force who want a job were little changed at 5.8 million.
+  - The marginally attached fell by 236,000 to 1.5 million. Discouraged workers were about unchanged at 414,000.
+  - The broadest underutilization measure, U-6, was 7.6%.
+- **Gaining sectors:**
+  - Health care added 17,000 jobs, slower than its 33,000 monthly average over the prior 12 months. Ambulatory care gained 13,000 and hospitals 12,000. Nursing and residential care lost 9,000.
+  - Construction added 11,000, with nonresidential specialty trade contractors up 12,000.
+  - Manufacturing added 9,000 and is up 72,000 since a December 2025 low.
+- **Losing sectors:** Financial activities fell by 7,000 and is down 129,000 since its May 2025 peak, mostly in insurance carriers (-90,000). Information fell by 10,000.
+- **Earnings:** Average hourly earnings rose 5 cents (0.1%) to $37.81, up 3.0% over 12 months. For production and nonsupervisory workers, they rose 7 cents (0.2%) to $32.60.
+- **Hours:** The private workweek held at 34.4 hours. In manufacturing, it was 40.6 hours with 3.0 hours of overtime.
+- **Revisions and next release:** July was revised down to -10,000 (from +21,000) and August to +133,000 (from +162,000), together 60,000 lower than previously reported. The October report is due November 6, 2026. BLS notes that a monthly payroll change of about 122,000 is needed to be statistically significant, which September's +29,000 is well below.

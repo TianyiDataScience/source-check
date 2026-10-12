@@ -256,3 +256,5 @@ The repository this skill comes from,
 https://github.com/TianyiDataScience/source-check, has an `examples/`
 folder (not inside this skill folder) with a short fictional report, an
 AI summary of it with planted mistakes, and the check this skill produced.
+It also has three real model summaries of a 39-page jobs report, with the
+check of each.

@@ -42,6 +42,24 @@ summary with planted mistakes:
 The full report ends with a "What to fix" list, and the agent can rewrite
 the flagged sentences on request.
 
+## On a real report
+
+Three models summarized the 39-page BLS jobs report for September 2026 in
+10 bullets each, and source-check checked every answer against the PDF:
+
+| Model | Claims | ✅ Supported | ❌ Contradicted | ⚠️ Not in source |
+|---|---|---|---|---|
+| claude-sonnet-5-5 | 51 | 51 | 0 | 0 |
+| gpt-6.1-sol | 47 | 46 | 0 | 1 |
+| gemini-3.1-pro-preview | 28 | 27 | 0 | 1 |
+
+Every number was right. The check flagged two sentences that describe the
+report in words it doesn't use: one answer says the report called the
+406,000 rise in household employment small, and another titles a bullet
+"Healthcare Leads Job Gains", a ranking the report never makes. The
+[full example](examples/bls-jobs-report-2026-09/) has the answers, the
+three check tables and how it was run.
+
 ## Why it checks against the document only
 
 When a model summarizes a long report, the mistakes that matter are
