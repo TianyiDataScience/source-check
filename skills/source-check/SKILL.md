@@ -16,7 +16,8 @@ source".
 
 Paths to scripts below are relative to this skill's folder. The scripts need
 Python 3.8 or later. For PDFs they use poppler's `pdftotext` or the `pypdf`
-package (pdfplumber or PyMuPDF also work), whichever is installed.
+package (pdfplumber or PyMuPDF also work), whichever is installed, and on a
+Mac with none of them, the PDFKit framework built into macOS.
 
 The examples below use a made-up company, Northwind, so they don't give
 away the answers to the example files that come with this skill.
@@ -74,6 +75,10 @@ one name, one comparison, one cause.
   period, a name or a number. Each such fact gets its own row.
 - Leave out greetings, questions, advice and the answer's own opinions.
   List them under "Not checked" at the end if they could mislead.
+- When one sentence lists several figures that a single passage confirms
+  (six groups' unemployment rates, say), you may put them in one row.
+  The totals still count each figure, and any figure that fails gets a
+  row of its own.
 - Number the claims in the order they appear and keep the answer's words.
   When the answer numbers its own items, start the Claim cell with that
   number, for example "(item 3) Commercial use fell", so the reader can
@@ -95,6 +100,8 @@ python3 scripts/search.py "$W/source.pages.txt" "operating margin" "4.2" "Cloud"
 numbers with or without thousands separators but never inside a longer
 number (`40367` finds `40,367` but not `140,367`). Words match inside
 longer words, so a stem like `compar` finds "compare" and "comparison".
+Search for specific words and numbers; common words such as "most" match
+on many pages and tell you little.
 
 For each claim, check all of these, not only the number:
 
@@ -124,6 +131,14 @@ counts as a match.
 More rules:
 
 - Never mark a claim supported because you know it is true.
+- When the text and a table describe the same figure differently (the
+  text says an industry "changed little", the table shows -10,000), a
+  claim that matches either one is supported. Mention the other in the
+  note.
+- Rankings ("led", "biggest", "fastest") are supported only when the
+  document ranks them, or when you compare like with like (industry with
+  industry, not an industry with a sector that contains others) and show
+  the figures. Otherwise they are not in source.
 - Right number, missing qualifier: supported, and the note names what the
   reader needs (the month, "seasonally adjusted", "preliminary"). It is
   contradicted only when the answer's words say the opposite, for example
@@ -153,7 +168,10 @@ Copy quotes from the pages file; don't retype them. Keep each one short:
 the words that prove the point. For a table, quote the row label, then
 ` ... `, then the cells you read, in the order they appear; name the
 column in the Note. The script checks that those cells are on the row
-label's line. `page` can be a number, "26-27" for a quote that runs across
+label's line. Some PDFs come out with a row's label on one line and its
+cells on the next; then quote the cells only, copied exactly, and name
+the row and column in the Note, or keep the label and add
+`"split_row": true`. `page` can be a number, "26-27" for a quote that runs across
 a page break, or a list. A `not_in_source` claim needs `searched`, and can
 also have a quote of the nearest passage.
 
@@ -226,8 +244,8 @@ Rules for the report:
 - Percent change confused with percentage points.
 - A total described as a segment, or the other way round.
 - Monthly figures presented as quarterly or yearly.
-- "Record", "highest", "first", "lowest" or "only" with no support in the
-  document.
+- "Record", "highest", "first", "lowest", "led" or "only" with no support
+  in the document.
 - True background facts the document never states.
 - A real quote stretched to say more than it does.
 - Invented precision: "41.23" when the document says "41.2".

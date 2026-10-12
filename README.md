@@ -85,7 +85,8 @@ The steps and rules the agent follows are in
 
 - Python 3.8 or later.
 - For PDFs, either poppler's `pdftotext` (`brew install poppler` or
-  `sudo apt install poppler-utils`) or `python3 -m pip install pypdf`.
+  `sudo apt install poppler-utils`) or `python3 -m pip install pypdf`. On a
+  Mac with neither, it falls back to the PDFKit framework built into macOS.
   Text, Markdown, HTML and .docx files need nothing else.
 
 Scanned PDFs need OCR first. The extraction step lists the pages that have

@@ -15,7 +15,8 @@ When the PDF defines its own page labels and they differ, the label is
 shown as "printed".
 
 PDF text comes from the first backend that works: poppler's pdftotext,
-then pypdf, pdfplumber or PyMuPDF if one of them is installed. .txt, .md,
+then pypdf, pdfplumber or PyMuPDF if one of them is installed, then on a
+Mac the PDFKit framework that comes with macOS. .txt, .md,
 .html and .docx files need nothing beyond Python 3.8. Their text has no
 pages, so it is written as a single "Page 1".
 
@@ -89,11 +90,46 @@ def pdf_pymupdf(path):
         return [page.get_text() for page in doc]
 
 
+# macOS has PDFKit built in. JavaScript for Automation can reach it, so a
+# Mac with no PDF tools installed can still extract text.
+PDFKIT_SCRIPT = """
+ObjC.import('Foundation');
+ObjC.import('PDFKit');
+function run(argv) {
+  var doc = $.PDFDocument.alloc.initWithURL($.NSURL.fileURLWithPath(argv[0]));
+  if (!doc || doc.isNil()) { return ''; }
+  var pages = [];
+  for (var i = 0; i < doc.pageCount; i++) {
+    var text = doc.pageAtIndex(i).string;
+    pages.push(text.isNil() ? '' : text.js);
+  }
+  return pages.join('\\f');
+}
+"""
+
+
+def pdf_macos_pdfkit(path):
+    if sys.platform != "darwin" or not shutil.which("osascript"):
+        return None
+    result = subprocess.run(
+        ["osascript", "-l", "JavaScript", "-e", PDFKIT_SCRIPT, os.path.abspath(path)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        return None
+    text = result.stdout.decode("utf-8", errors="replace")
+    if text.endswith("\n"):
+        text = text[:-1]
+    return text.split("\f") if text.strip() else None
+
+
 PDF_BACKENDS = [
     ("pdftotext", pdf_pdftotext),
     ("pypdf", pdf_pypdf),
     ("pdfplumber", pdf_pdfplumber),
     ("pymupdf", pdf_pymupdf),
+    ("macOS PDFKit", pdf_macos_pdfkit),
 ]
 
 
@@ -172,7 +208,7 @@ def extract(path):
             if pages:
                 return pages, name, pdf_page_labels(path, len(pages))
         sys.exit(
-            "No PDF text extractor found. Install one of them:\n"
+            "No PDF text extractor worked. Install one of them:\n"
             "  macOS:   brew install poppler      (gives pdftotext)\n"
             "  Linux:   sudo apt install poppler-utils\n"
             "  Any OS:  python3 -m pip install pypdf"

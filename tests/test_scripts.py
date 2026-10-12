@@ -26,6 +26,8 @@ from search import number_pattern, term_pattern  # noqa: E402
 def have_pdf_backend():
     if shutil.which("pdftotext"):
         return True
+    if sys.platform == "darwin" and shutil.which("osascript"):
+        return True
     try:
         import pypdf  # noqa: F401
         return True
