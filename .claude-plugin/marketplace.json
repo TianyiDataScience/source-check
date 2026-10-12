@@ -1,0 +1,21 @@
+{
+  "name": "source-check",
+  "owner": {
+    "name": "Tianyi"
+  },
+  "metadata": {
+    "description": "Check an AI answer against its source document, claim by claim, with page numbers and verified quotes",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "source-check",
+      "description": "Check an AI answer against the document it came from: a verdict, a page and a verified quote for every claim",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/source-check"
+      ]
+    }
+  ]
+}
